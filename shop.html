@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produk — MitaElektronik</title>
+    <meta
+      name="description"
+      content="MitaElektronik: toko online elektronik, gaming, dan fashion."
+    />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/mita-techno-favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="shop">
+    <div id="site-header"></div>
+
+    <main>
+      <section class="page-head">
+        <div class="container">
+          <h1>Semua produk</h1>
+          <p>
+            Cari berdasarkan nama, filter kategori dan warna, atau urutkan
+            berdasarkan harga.
+          </p>
+        </div>
+      </section>
+      <section class="section container" style="padding-top: 40px">
+        <div class="toolbar">
+          <div class="toolbar-row">
+            <input
+              type="search"
+              id="search-product"
+              placeholder="Cari produk, misalnya mouse"
+              aria-label="Cari produk"
+            />
+            <select id="sort-product" aria-label="Urutkan produk">
+              <option value="default">Urutan awal</option>
+              <option value="low">Harga terendah</option>
+              <option value="high">Harga tertinggi</option>
+              <option value="name">Nama A–Z</option>
+            </select>
+            <select id="color-filter" aria-label="Filter warna">
+              <option value="">Semua warna</option>
+            </select>
+          </div>
+          <div class="chips" id="category-chips"></div>
+        </div>
+        <p class="result-count" id="product-total" aria-live="polite"></p>
+        <div class="product-grid" id="product-container"></div>
+        <div class="empty-state" id="empty-product" hidden>
+          <div class="empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="10.8" cy="10.8" r="6.8" />
+              <path d="m16 16 4.5 4.5" />
+            </svg>
+          </div>
+          <h3>Produk tidak ditemukan</h3>
+          <p>Coba kata kunci lain atau hapus filter yang dipilih.</p>
+          <button class="btn btn-primary" id="reset-filter" type="button">
+            Reset filter
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="js/products.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/shop.js"></script>
+  </body>
+</html>

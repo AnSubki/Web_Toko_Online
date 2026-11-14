@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akun Saya — MitaElektronik</title>
+    <meta
+      name="description"
+      content="MitaElektronik: toko online elektronik, gaming, dan fashion."
+    />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/mita-techno-favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+  </head>
+  <body data-page="profile">
+    <div id="site-header"></div>
+
+    <main class="pf">
+      <!-- Sampul -->
+      <section class="pf-cover">
+        <div class="container pf-cover-in">
+          <div class="pf-avatar" id="avatar" aria-hidden="true"></div>
+          <div class="pf-id">
+            <h1>
+              Halo, <span id="greet-name"></span>
+              <svg class="pf-greeting-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M8.2 11.2V5.8a1.4 1.4 0 0 1 2.8 0v4.1-6a1.4 1.4 0 0 1 2.8 0v6.2-5a1.4 1.4 0 0 1 2.8 0v6.1-3.1a1.4 1.4 0 0 1 2.8 0v6.1c0 3-2.4 5.4-5.4 5.4h-1.5c-1.8 0-3.5-.9-4.5-2.4L5 12.8a1.5 1.5 0 0 1 2.3-1.9l2.2 2.3" />
+                <path d="m4.2 5.3 1.4 1.4M2.8 9h2M6.2 2.8l.5 2" />
+              </svg>
+            </h1>
+            <p id="profile-email"></p>
+            <span class="pf-level" id="level-chip"></span>
+          </div>
+          <div class="pf-cta">
+            <a href="shop.html" class="btn btn-light">
+              <svg class="pf-button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 8h14l1 12H4L5 8Z" />
+                <path d="M9 9V6a3 3 0 0 1 6 0v3" />
+              </svg>
+              Belanja lagi
+            </a>
+            <button type="button" class="btn pf-out" id="logout-btn">
+              Keluar
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="container pf-layout">
+        <!-- Menu -->
+        <nav class="pf-nav" aria-label="Menu akun" role="tablist">
+          <button
+            type="button"
+            class="pf-tab active"
+            data-tab="ringkasan"
+            role="tab"
+          >
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m3.5 10 8.5-7 8.5 7v10.5h-6v-6h-5v6h-6V10Z" /></svg></i><span>Ringkasan</span>
+          </button>
+          <button type="button" class="pf-tab" data-tab="pesanan" role="tab">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" /><path d="m4.4 7.7 7.6 4.4 7.6-4.4M12 12.1V21" /></svg></i><span>Pesanan</span><em id="n-orders" hidden></em>
+          </button>
+          <button type="button" class="pf-tab" data-tab="favorit" role="tab">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20.2 8.5c0 4.3-8.2 10.1-8.2 10.1S3.8 12.8 3.8 8.5a4.2 4.2 0 0 1 8.2-1.2 4.2 4.2 0 0 1 8.2 1.2Z" /></svg></i><span>Favorit</span><em id="n-fav" hidden></em>
+          </button>
+          <button type="button" class="pf-tab" data-tab="alamat" role="tab">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" /><circle cx="12" cy="10" r="2.3" /></svg></i><span>Alamat</span><em id="n-addr" hidden></em>
+          </button>
+          <button type="button" class="pf-tab" data-tab="akun" role="tab">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" /><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 2Z" /></svg></i><span>Akun</span>
+          </button>
+        </nav>
+
+        <div class="pf-body">
+          <!-- Ringkasan -->
+          <section class="pf-panel" data-panel="ringkasan">
+            <div class="pf-stats" id="pf-stats"></div>
+            <div class="pf-two">
+              <div class="pf-card pf-levelcard" id="level-card"></div>
+              <div class="pf-card">
+                <div class="pf-head"><h2>Voucher untukmu</h2></div>
+                <div id="voucher-list"></div>
+              </div>
+            </div>
+            <div class="pf-card">
+              <div class="pf-head">
+                <h2>Pesanan terbaru</h2>
+                <button type="button" class="pf-link" data-goto="pesanan">
+                  Lihat semua
+                </button>
+              </div>
+              <div id="recent-orders"></div>
+            </div>
+          </section>
+
+          <!-- Pesanan -->
+          <section class="pf-panel" data-panel="pesanan" hidden>
+            <div class="pf-card">
+              <div class="pf-head"><h2>Riwayat pesanan</h2></div>
+              <div class="chips" id="order-filter"></div>
+              <div id="orders-list" class="pf-orders"></div>
+            </div>
+          </section>
+
+          <!-- Favorit -->
+          <section class="pf-panel" data-panel="favorit" hidden>
+            <div class="pf-card">
+              <div class="pf-head"><h2>Produk favorit</h2></div>
+              <div id="fav-list"></div>
+            </div>
+          </section>
+
+          <!-- Alamat -->
+          <section class="pf-panel" data-panel="alamat" hidden>
+            <div class="pf-card">
+              <div class="pf-head">
+                <h2>Alamat pengiriman</h2>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="add-addr"
+                >
+                  + Tambah alamat
+                </button>
+              </div>
+
+              <form class="addr-form" id="addr-form" hidden novalidate>
+                <h3 id="addr-title">Tambah alamat</h3>
+                <div class="pf-grid">
+                  <div class="form-group">
+                    <label for="a-label">Label</label>
+                    <select id="a-label">
+                      <option>Rumah</option>
+                      <option>Kantor</option>
+                      <option>Lainnya</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="a-recipient">Nama penerima</label>
+                    <input
+                      id="a-recipient"
+                      autocomplete="name"
+                      placeholder="Nama lengkap"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="a-phone">Nomor HP</label>
+                    <input
+                      id="a-phone"
+                      type="tel"
+                      inputmode="tel"
+                      placeholder="081234567890"
+                      autocomplete="tel"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="a-address">Alamat lengkap</label>
+                  <textarea
+                    id="a-address"
+                    placeholder="Jalan, nomor rumah, kecamatan, kota, kode pos"
+                  ></textarea>
+                </div>
+                <label class="pf-check"
+                  ><input type="checkbox" id="a-main" /> Jadikan alamat
+                  utama</label
+                >
+                <p class="pf-msg" id="addr-msg" role="alert"></p>
+                <div class="pf-actions">
+                  <button type="submit" class="btn btn-primary btn-sm">
+                    Simpan alamat
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-ghost btn-sm"
+                    id="addr-cancel"
+                  >
+                    Batal
+                  </button>
+                </div>
+              </form>
+
+              <div id="addr-list"></div>
+            </div>
+          </section>
+
+          <!-- Akun -->
+          <section class="pf-panel" data-panel="akun" hidden>
+            <div class="pf-card">
+              <div class="pf-head"><h2>Data diri</h2></div>
+              <form id="acc-form" novalidate>
+                <div class="pf-grid">
+                  <div class="form-group">
+                    <label for="p-name">Nama lengkap</label>
+                    <input id="p-name" autocomplete="name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="p-phone"
+                      >Nomor HP <span class="opt-label">(opsional)</span></label
+                    >
+                    <input
+                      id="p-phone"
+                      type="tel"
+                      inputmode="tel"
+                      placeholder="081234567890"
+                      autocomplete="tel"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="p-email">Email</label>
+                    <span class="pf-input-wrap pf-readonly-wrap">
+                      <input id="p-email" type="email" readonly aria-label="Email, tidak dapat diubah" />
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" title="Email tidak dapat diubah"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label>Bergabung sejak</label>
+                    <span class="pf-input-wrap pf-readonly-wrap">
+                      <input id="p-since" readonly aria-label="Bergabung sejak, tidak dapat diubah" />
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" title="Tanggal bergabung tidak dapat diubah"><rect x="4" y="5" width="16" height="16" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /><path d="m9 15 2 2 4-4" /></svg>
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Warna avatar</label>
+                  <div class="swatches" id="swatches"></div>
+                </div>
+                <p class="pf-msg" id="acc-msg" role="alert"></p>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Simpan perubahan
+                </button>
+              </form>
+            </div>
+
+            <div class="pf-card">
+              <div class="pf-head"><h2>Ganti password</h2></div>
+              <form id="pw-form" novalidate>
+                <div class="pf-grid">
+                  <div class="form-group">
+                    <label for="pw-old">Password sekarang</label>
+                    <span class="pf-input-wrap pf-password-wrap">
+                      <input id="pw-old" type="password" autocomplete="current-password" />
+                      <button type="button" class="pf-password-toggle" data-password-toggle aria-controls="pw-old" aria-label="Tampilkan password sekarang" aria-pressed="false">
+                        <svg class="pf-eye-show" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.5" /></svg>
+                        <svg class="pf-eye-hide" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 3 18 18M10.6 6.2A10.7 10.7 0 0 1 12 6c6.1 0 9.5 6 9.5 6a17 17 0 0 1-3 3.6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.4 6 9.5 6a10 10 0 0 0 3.1-.5" /><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" /></svg>
+                      </button>
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="pw-new">Password baru</label>
+                    <span class="pf-input-wrap pf-password-wrap">
+                      <input id="pw-new" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter" />
+                      <button type="button" class="pf-password-toggle" data-password-toggle aria-controls="pw-new" aria-label="Tampilkan password baru" aria-pressed="false">
+                        <svg class="pf-eye-show" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.5" /></svg>
+                        <svg class="pf-eye-hide" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 3 18 18M10.6 6.2A10.7 10.7 0 0 1 12 6c6.1 0 9.5 6 9.5 6a17 17 0 0 1-3 3.6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.4 6 9.5 6a10 10 0 0 0 3.1-.5" /><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" /></svg>
+                      </button>
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="pw-conf">Ulangi password baru</label>
+                    <span class="pf-input-wrap pf-password-wrap">
+                      <input id="pw-conf" type="password" autocomplete="new-password" />
+                      <button type="button" class="pf-password-toggle" data-password-toggle aria-controls="pw-conf" aria-label="Tampilkan ulangi password baru" aria-pressed="false">
+                        <svg class="pf-eye-show" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.5" /></svg>
+                        <svg class="pf-eye-hide" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 3 18 18M10.6 6.2A10.7 10.7 0 0 1 12 6c6.1 0 9.5 6 9.5 6a17 17 0 0 1-3 3.6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.4 6 9.5 6a10 10 0 0 0 3.1-.5" /><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" /></svg>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <p class="pf-msg" id="pw-msg" role="alert"></p>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Ganti password
+                </button>
+              </form>
+            </div>
+
+            <div class="pf-card pf-danger">
+              <div class="pf-head"><h2>Zona berbahaya</h2></div>
+              <p class="muted">
+                Menghapus akun akan menghapus data akun, riwayat pesanan, dan
+                alamat yang tersimpan di browser ini. Tindakan ini tidak bisa
+                dibatalkan.
+              </p>
+              <button type="button" class="btn pf-del" id="del-acc">
+                Hapus akun saya
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="modal cancel-modal"
+      id="cancel-modal"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cancel-title"
+    >
+      <div class="modal-card cancel-card">
+        <h2 id="cancel-title">Konfirmasi pembatalan</h2>
+        <p class="muted" id="cancel-order-label"></p>
+        <form id="cancel-form" novalidate>
+          <div class="form-group">
+            <label for="cancel-reason">Alasan pembatalan</label>
+            <select id="cancel-reason" required>
+              <option value="">Pilih alasan</option>
+              <option>Saya berubah pikiran</option>
+              <option>Salah memilih produk</option>
+              <option>Menemukan produk lain</option>
+              <option>Alamat pengiriman perlu diubah</option>
+              <option value="other">Alasan lainnya</option>
+            </select>
+          </div>
+          <div class="form-group" id="cancel-note-group" hidden>
+            <label for="cancel-note">Jelaskan alasanmu</label>
+            <textarea id="cancel-note" maxlength="300"></textarea>
+          </div>
+          <p class="pf-msg error" id="cancel-msg" role="alert"></p>
+          <div class="modal-actions">
+            <button type="submit" class="btn pf-del">
+              Konfirmasi pembatalan
+            </button>
+            <button type="button" class="btn btn-ghost" id="cancel-close">
+              Kembali
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="js/products.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

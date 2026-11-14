@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang — MitaElektronik</title>
+    <meta
+      name="description"
+      content="MitaElektronik: toko online elektronik, gaming, dan fashion."
+    />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/mita-techno-favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="cart">
+    <div id="site-header"></div>
+
+    <main>
+      <section class="page-head">
+        <div class="container">
+          <h1>Keranjang belanja</h1>
+          <p>Periksa jumlah barang sebelum checkout.</p>
+        </div>
+      </section>
+      <div class="container shop-layout">
+        <div id="cart-list" aria-live="polite"></div>
+        <aside class="panel sticky" id="cart-summary" hidden>
+          <h2>Ringkasan</h2>
+          <div class="sum-row">
+            <span>Jumlah barang</span><b id="sum-items">0</b>
+          </div>
+          <div class="sum-row"><span>Subtotal</span><b id="sum-sub"></b></div>
+          <div class="sum-row"><span>Ongkir</span><b id="sum-ship"></b></div>
+          <div class="sum-row total"><b>Total</b><b id="sum-total"></b></div>
+          <p class="hint" id="ship-hint"></p>
+          <a href="checkout.html" class="btn btn-primary btn-block"
+            >Lanjut ke checkout</a
+          >
+          <a
+            href="shop.html"
+            class="btn btn-ghost btn-block"
+            style="margin-top: 10px"
+            >Tambah produk lain</a
+          >
+        </aside>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="js/products.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>
