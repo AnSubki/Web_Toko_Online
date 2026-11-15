@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Produk — MitaElektronik</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/mita-techno-favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="shop">
+    <div id="site-header"></div>
+
+    <main class="container pd">
+      <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+
+      <div class="pd-layout" id="pd-layout">
+        <!-- Foto -->
+        <div class="pd-gallery">
+          <div class="pd-main"><img id="pd-img" alt="" /></div>
+          <div
+            class="pd-thumbs"
+            id="pd-thumbs"
+            role="group"
+            aria-label="Pilih foto produk"
+          ></div>
+        </div>
+
+        <!-- Info -->
+        <div class="pd-info">
+          <h1 id="pd-name"></h1>
+          <p class="pd-sku" id="pd-sku"></p>
+          <p class="pd-sold" id="pd-sold"></p>
+          <div class="pd-price" id="pd-price"></div>
+          <div class="pd-disc" id="pd-disc"></div>
+
+          <div class="pd-tabs" role="tablist">
+            <button type="button" class="active" data-pdtab="spec" role="tab">
+              Spesifikasi
+            </button>
+            <button type="button" data-pdtab="stock" role="tab">
+              Ketersediaan Toko
+            </button>
+          </div>
+
+          <div class="pd-spec" id="pd-spec">
+            <h4>Umum</h4>
+            <dl id="pd-dl"></dl>
+            <h4>Deskripsi produk</h4>
+            <p id="pd-desc"></p>
+          </div>
+          <div class="pd-spec" id="pd-stock" hidden>
+            <h4>Ketersediaan</h4>
+            <dl id="pd-stock-dl"></dl>
+          </div>
+
+          <div class="pd-voucher">
+            <h4>Promo voucher</h4>
+            <div class="vc">
+              <div class="vc-ic">%</div>
+              <div>
+                <b>Gratis ongkir</b><small>Minimal belanja Rp500.000</small>
+              </div>
+            </div>
+            <a href="register.html" class="vc"
+              ><div class="vc-ic">★</div>
+              <div>
+                <b>Pengguna baru</b
+                ><small>Daftar akun dan simpan riwayat pesananmu</small>
+              </div></a
+            >
+          </div>
+        </div>
+
+        <!-- Kotak beli -->
+        <aside class="pd-buy">
+          <div class="qty-row">
+            <span>Jumlah</span>
+            <div class="qty" role="group" aria-label="Jumlah barang">
+              <button type="button" id="qty-dec" aria-label="Kurangi">−</button>
+              <span id="pd-qty">1</span>
+              <button type="button" id="qty-inc" aria-label="Tambah">+</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline" id="btn-cart">
+            🛒 Keranjang
+          </button>
+          <button type="button" class="btn btn-primary" id="btn-buy">
+            Beli
+          </button>
+          <div class="pd-extra">
+            <button type="button" id="btn-wish">♡ Wishlist</button>
+            <button type="button" id="btn-share">↗ Share</button>
+          </div>
+        </aside>
+      </div>
+
+      <div class="empty-state" id="pd-missing" hidden>
+        <div class="empty-icon">🔍</div>
+        <h3>Produk tidak ditemukan</h3>
+        <p>Produk yang kamu cari mungkin sudah tidak tersedia.</p>
+        <a href="shop.html" class="btn btn-primary">Lihat semua produk</a>
+      </div>
+
+      <section class="pd-related" id="pd-related">
+        <h2>Produk lain untukmu</h2>
+        <div class="product-grid" id="related-products"></div>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="js/products.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/detail.js"></script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar — MitaElektronik</title>
+    <meta
+      name="description"
+      content="MitaElektronik: toko online elektronik, gaming, dan fashion."
+    />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/mita-techno-favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body data-page="register">
+    <div id="site-header"></div>
+
+    <main class="auth-page">
+      <div class="auth-wrap">
+        <div class="auth-visual">
+          <div>
+            <h1>Buat akun<br /><span class="auth-brand">MitaElektronik.</span></h1>
+            <p>Gratis dan selesai dalam satu menit.</p>
+          </div>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m3.5 7 8.5-4 8.5 4v10L12 21l-8.5-4V7Z" />
+                <path d="m3.8 7.2 8.2 4 8.2-4M12 11.2V21" />
+              </svg>
+              <span>Riwayat pesanan tersimpan</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m13.5 2.8-8 10h6l-1 8.4 8-11h-6l1-7.4Z" />
+              </svg>
+              <span>Checkout lebih cepat</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 8.5h16v12H4v-12ZM2.8 4h18.4v4.5H2.8V4Z" />
+                <path d="M12 4v16.5M12 4c-4.8 0-5.3-4.2-2.2-4.2C12.2-.2 12 4 12 4Zm0 0c4.8 0 5.3-4.2 2.2-4.2C11.8-.2 12 4 12 4Z" />
+              </svg>
+              <span>Info produk terbaru</span>
+            </li>
+          </ul>
+        </div>
+        <div class="auth-form">
+          <h2>Daftar akun baru</h2>
+          <p class="sub">Isi data di bawah ini.</p>
+          <form id="register-form" novalidate>
+            <div id="form-message" class="form-message" role="alert"></div>
+            <div class="form-group">
+              <label for="name">Nama lengkap</label
+              ><input id="name" name="name" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label
+              ><input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="nama@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="password-box">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Minimal 6 karakter"
+                  required
+                /><button
+                  type="button"
+                  id="toggle-password"
+                  aria-label="Tampilkan password"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M2.8 12s3.2-6 9.2-6 9.2 6 9.2 6-3.2 6-9.2 6-9.2-6-9.2-6Z" />
+                    <circle cx="12" cy="12" r="2.7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="confirm">Ulangi password</label>
+              <div class="password-box">
+                <input
+                  id="confirm"
+                  name="confirm"
+                  type="password"
+                  autocomplete="new-password"
+                  required
+                /><button
+                  type="button"
+                  id="toggle-confirm"
+                  aria-label="Tampilkan password"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M2.8 12s3.2-6 9.2-6 9.2 6 9.2 6-3.2 6-9.2 6-9.2-6-9.2-6Z" />
+                    <circle cx="12" cy="12" r="2.7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Daftar
+            </button>
+          </form>
+          <p class="switch">Sudah punya akun? <a href="login.html">Masuk</a></p>
+        </div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="js/products.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

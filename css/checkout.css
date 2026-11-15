@@ -1,0 +1,672 @@
+/* ==========================================================
+   CHECKOUT — checkout.css (khusus halaman checkout)
+========================================================== */
+.co {
+  padding: 28px 0 90px;
+}
+.co-title {
+  margin: 22px 0 6px;
+  font-size: clamp(26px, 3vw, 36px);
+}
+.co-sub {
+  margin-bottom: 28px;
+  color: var(--muted);
+}
+
+/* ---------- Langkah ---------- */
+.steps {
+  display: flex;
+  align-items: center;
+  max-width: 560px;
+  list-style: none;
+}
+.steps li {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+.steps li:last-child {
+  flex: 0;
+}
+.steps li span {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+.steps li em {
+  font-style: normal;
+  white-space: nowrap;
+}
+.steps li:not(:last-child)::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  margin: 0 12px;
+  border-radius: 99px;
+  background: var(--line);
+}
+.steps li.done {
+  color: var(--navy);
+}
+.steps li.done span {
+  background: var(--ok);
+  color: #fff;
+}
+.steps li.done::after {
+  background: var(--ok);
+}
+.steps li.now {
+  color: var(--primary-hover);
+}
+.steps li.now span {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.4);
+}
+.steps li.now::after {
+  background: linear-gradient(90deg, var(--primary-hover), var(--line));
+}
+
+/* ---------- Tata letak ---------- */
+.co-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 28px;
+  align-items: start;
+}
+.co-layout > *,
+.co-card,
+.co-summary {
+  min-width: 0;
+}
+.co-form {
+  display: grid;
+  gap: 18px;
+}
+
+.co-card {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+.co-card:focus-within {
+  border-color: var(--line);
+  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.1);
+}
+.co-card > header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.co-card h2 {
+  margin: 0;
+  font-size: 19px;
+}
+.co-card header p {
+  color: var(--muted);
+  font-size: 13px;
+}
+.co-num {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--navy);
+  color: var(--surface);
+  font-family: var(--display);
+  font-weight: 800;
+}
+.co-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+.co-address-list {
+  display: grid;
+  gap: 12px;
+}
+.co-address-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+.co-address-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.co-address-card {
+  display: grid;
+  gap: 5px;
+  padding: 16px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  transition: 0.2s;
+}
+.co-address-option:hover .co-address-card {
+  border-color: var(--line);
+}
+.co-address-option input:checked + .co-address-card,
+.co-address-card.selected {
+  border-color: var(--primary-hover);
+  background: var(--primary-soft);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.12);
+}
+.co-address-option input:focus-visible + .co-address-card {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.co-address-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.co-address-top .tag {
+  margin: 0;
+}
+.co-address-main {
+  color: var(--primary-hover);
+  font-size: 12px;
+  font-weight: 800;
+}
+.co-address-detail {
+  color: var(--muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.co-address-link {
+  display: inline-block;
+  margin-top: 14px;
+}
+.opt-label {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ---------- Kartu pilihan (pengiriman & pembayaran) ---------- */
+.opt-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+.opt {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+.opt input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.opt-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 100%;
+  padding: 16px 16px 14px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  transition: 0.2s;
+}
+.opt:hover .opt-box {
+  border-color: var(--line);
+  transform: translateY(-2px);
+}
+.opt-box > svg {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 6px;
+  color: var(--muted);
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+.opt-box b {
+  color: var(--navy);
+  font-size: 14px;
+}
+.opt-box small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.opt-box em {
+  margin-top: 8px;
+  color: var(--primary-hover);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 800;
+}
+.opt-box::after {
+  content: "✓";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  opacity: 0;
+  scale: 0.5;
+  transition: 0.2s;
+}
+.opt input:checked + .opt-box {
+  border-color: var(--primary-hover);
+  background: var(--primary-soft);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.16);
+}
+.opt input:checked + .opt-box::after {
+  opacity: 1;
+  scale: 1;
+}
+.opt input:focus-visible + .opt-box {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.opt-group.invalid .opt-box {
+  border-color: var(--danger);
+}
+.pay-hint {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--primary-hover);
+  font-size: 13px;
+}
+
+/* ---------- Ringkasan ---------- */
+.co-summary {
+  position: sticky;
+  top: 104px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.co-summary h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+  font-size: 19px;
+}
+.co-summary h2 small {
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+}
+.co-items {
+  display: grid;
+  gap: 12px;
+  max-height: 280px;
+  margin-bottom: 18px;
+  padding-right: 4px;
+  overflow: auto;
+}
+.co-item {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+.co-item img {
+  width: 60px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.co-item b {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--navy);
+  font-size: 14px;
+}
+.co-item small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.co-item strong {
+  font-family: var(--display);
+  font-size: 13px;
+}
+
+.co-promo {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1.5px dashed var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.co-promo label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+}
+.promo-row {
+  display: flex;
+  gap: 8px;
+}
+.promo-row input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.promo-row input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(63, 63, 70, 0.16);
+}
+.promo-msg {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.promo-msg.ok {
+  color: var(--ok);
+}
+.promo-msg.err {
+  color: var(--danger);
+}
+.promo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.promo-chips button {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #fff;
+  color: var(--primary-hover);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  transition: 0.2s;
+}
+.promo-chips button:hover {
+  background: var(--ink-black);
+  color: #ffffff;
+}
+
+.sum-row.disc b:last-child {
+  color: var(--ok);
+}
+.sum-row s {
+  margin-right: 6px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.co-free {
+  margin: 14px 0 4px;
+}
+.co-free p {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.co-bar-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--line);
+}
+.co-bar-fill {
+  width: 0;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+  transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.co-saving {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--primary-hover);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.btn-lg {
+  padding: 16px 24px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+.co-submit {
+  margin-top: 18px;
+}
+.co-back {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+}
+.co-trust {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.co-trust li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.co-trust svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: var(--muted);
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+/* ---------- Bar bawah (HP) ---------- */
+.co-bar {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 150;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 4%;
+  border-top: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 -10px 30px rgba(17, 17, 17, 0.1);
+}
+.co-bar small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+.co-bar b {
+  color: var(--primary-hover);
+  font-family: var(--display);
+  font-size: 18px;
+}
+
+/* ---------- Pesanan berhasil ---------- */
+.ok-check {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: #fff;
+  font-size: 42px;
+  box-shadow: 0 14px 30px rgba(63, 63, 70, 0.4);
+  animation: okpop 0.6s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.empty-icon svg {
+  width: 52px;
+  height: 52px;
+  margin-inline: auto;
+  color: var(--muted);
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+@keyframes okpop {
+  from {
+    scale: 0.2;
+    opacity: 0;
+  }
+}
+.ok-info {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 22px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--bg);
+  font-size: 13px;
+  text-align: left;
+}
+.ok-info div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ok-info span {
+  color: var(--muted);
+}
+.ok-info b {
+  text-align: right;
+}
+.confetti {
+  position: fixed;
+  top: -14px;
+  z-index: 600;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  pointer-events: none;
+  animation: conf var(--t) ease-in forwards;
+}
+@keyframes conf {
+  to {
+    transform: translate3d(var(--x), 105vh, 0) rotate(var(--r));
+    opacity: 0.9;
+  }
+}
+
+/* ---------- Responsif ---------- */
+@media (max-width: 1000px) {
+  .co {
+    padding-bottom: 110px;
+  }
+  .co-layout {
+    grid-template-columns: 1fr;
+  }
+  .co-summary {
+    position: static;
+  }
+  .co-submit {
+    display: none;
+  }
+  .co-bar {
+    display: flex;
+  }
+}
+@media (max-width: 640px) {
+  .co-grid {
+    grid-template-columns: 1fr;
+  }
+  .co-card {
+    padding: 20px;
+  }
+  .steps li:not(.now) em {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .co {
+    padding-top: 20px;
+  }
+  .co-card,
+  .co-summary {
+    padding: 16px;
+  }
+  .co-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+  .co-item img {
+    width: 48px;
+    height: 48px;
+  }
+  .co-item strong {
+    grid-column: 2;
+  }
+  .co-bar {
+    gap: 8px;
+    padding: 10px 14px;
+  }
+  .co-bar .btn {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .co-bar b {
+    font-size: 16px;
+  }
+}
