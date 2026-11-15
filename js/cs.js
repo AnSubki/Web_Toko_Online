@@ -1,56 +1,18 @@
 class CustomerServiceChat {
   constructor() {
     this.isOpen = false;
-    this.messages = this.loadMessages();
-    this.saveMessages();
-    this.initUI();
-    this.renderMessages();
-  }
+    this.apiKey = "AQ.Ab8RN6JDUWTkPED4tt7VaBnOrsf7PvuK-4wwK_KkeflR5JGhbw";
 
-  loadMessages() {
-    try {
-      const saved = JSON.parse(localStorage.getItem("mita_cs_chat") || "null");
-      if (Array.isArray(saved)) {
-        const messages = saved
-          .filter(
-            (message) =>
-              message &&
-              (message.sender === "user" || message.sender === "cs") &&
-              typeof message.text === "string",
-          )
-          .slice(-50)
-          .map((message) => ({
-            sender: message.sender,
-            text: message.text,
-            time:
-              typeof message.time === "string"
-                ? message.time
-                : this.getCurrentTime(),
-          }));
-        if (messages.length) return messages;
-      }
-    } catch (error) {
-      console.error("Gagal membaca riwayat chat.", error);
-    }
-
-    return [
+    this.messages = JSON.parse(localStorage.getItem("mita_cs_chat_v2")) || [
       {
+        id: "msg-init",
         sender: "cs",
         text: "Halo! Selamat datang di Layanan Pelanggan MitaElektronik 👋. Ada yang bisa kami bantu terkait produk atau pesananmu?",
         time: this.getCurrentTime(),
       },
     ];
-  }
-
-  saveMessages() {
-    try {
-      localStorage.setItem(
-        "mita_cs_chat",
-        JSON.stringify(this.messages.slice(-50)),
-      );
-    } catch (error) {
-      console.error("Gagal menyimpan riwayat chat.", error);
-    }
+    this.initUI();
+    this.renderMessages();
   }
 
   getCurrentTime() {
@@ -72,24 +34,24 @@ class CustomerServiceChat {
           <div class="cs-header-info">
             <span class="cs-avatar">🎧</span>
             <div>
-              <div class="cs-title">Layanan Pelanggan</div>
-              <div class="cs-status">● Online · Siap membantu</div>
+              <div class="cs-title">Layanan Pelanggan MitaElektronik</div>
+              <div class="cs-status">● Online · AI Siap Membantu</div>
             </div>
           </div>
           <button id="cs-close-btn" type="button" aria-label="Tutup chat">✕</button>
         </div>
 
-        <div class="cs-messages" id="cs-messages-list" aria-live="polite"></div>
+        <div class="cs-messages" id="cs-messages-list"></div>
 
         <div class="cs-quick-replies" id="cs-quick-replies">
-          <button data-topic="Keluhan Produk">📦 Keluhan Produk</button>
-          <button data-topic="Kritik & Saran Situs">💡 Kritik & Saran Situs</button>
-          <button data-topic="Kendala Pembayaran / Pesanan">💳 Kendala Pesanan</button>
+          <button data-topic="Bagaimana cara klaim garansi produk elektronik?">📦 Klaim Garansi</button>
+          <button data-topic="Rekomendasi kipas angin atau pendingin ruangan terbaik?">❄️ Rekomendasi Kipas</button>
+          <button data-topic="Bagaimana cara melacak status pesanan saya?">💳 Cek Pesanan</button>
         </div>
 
         <form class="cs-input-area" id="cs-chat-form">
-          <input type="text" id="cs-chat-input" placeholder="Tulis pesan, keluhan, atau saran..." autocomplete="off" maxlength="500" required />
-          <button type="submit" id="cs-send-btn" title="Kirim Pesan">➤</button>
+          <input type="text" id="cs-chat-input" placeholder="Tulis pertanyaan seputar produk..." autocomplete="off" required />
+          <button type="submit" title="Kirim Pesan">➤</button>
         </form>
       </div>
 
@@ -117,13 +79,13 @@ class CustomerServiceChat {
         padding: 0;
         display: grid;
         place-items: center;
-        background: var(--primary);
+        background: #0066cc;
         color: #ffffff;
         border: 0;
         border-radius: 50%;
         cursor: pointer;
         box-shadow: 0 6px 20px rgba(17, 17, 17, 0.24);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        transition: transform 0.2s ease;
       }
       #cs-toggle-btn svg {
         display: block;
@@ -131,33 +93,24 @@ class CustomerServiceChat {
         height: 27px;
       }
       #cs-toggle-btn:hover {
-        transform: translateY(-2px) scale(1.04);
-        background: var(--primary-hover);
-        box-shadow: 0 9px 24px rgba(17, 17, 17, 0.28);
-      }
-      #cs-toggle-btn:focus-visible,
-      #cs-close-btn:focus-visible,
-      .cs-input-area button:focus-visible {
-        outline: 3px solid var(--primary);
-        outline-offset: 3px;
+        transform: scale(1.04);
+        background: #0052a3;
       }
       #cs-chat-window {
         position: absolute;
         bottom: calc(100% + 14px);
         right: 0;
         width: min(360px, calc(100vw - 32px));
-        height: min(460px, calc(100vh - 110px));
-        height: min(460px, calc(100dvh - 110px));
+        height: 460px;
         background: #ffffff;
         border-radius: 16px;
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
-        border: 1px solid var(--line);
+        border: 1px solid #ddd;
         display: flex;
         flex-direction: column;
         overflow: hidden;
         opacity: 0;
         visibility: hidden;
-        pointer-events: none;
         transform: translateY(12px) scale(0.98);
         transform-origin: bottom right;
         transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
@@ -165,11 +118,10 @@ class CustomerServiceChat {
       #cs-chat-window.is-open {
         opacity: 1;
         visibility: visible;
-        pointer-events: auto;
         transform: translateY(0) scale(1);
       }
       .cs-header {
-        background: var(--hero-gradient);
+        background: #0066cc;
         color: #ffffff;
         padding: 14px 16px;
         display: flex;
@@ -193,7 +145,7 @@ class CustomerServiceChat {
       }
       .cs-status {
         font-size: 11px;
-        color: var(--primary-soft);
+        color: #d0e8ff;
       }
       #cs-close-btn {
         background: transparent;
@@ -201,13 +153,12 @@ class CustomerServiceChat {
         color: #ffffff;
         font-size: 16px;
         cursor: pointer;
-        padding: 4px;
       }
       .cs-messages {
         flex: 1;
         padding: 14px;
         overflow-y: auto;
-        background: var(--bg);
+        background: #f9f9f9;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -219,18 +170,17 @@ class CustomerServiceChat {
         font-size: 13px;
         line-height: 1.45;
         word-wrap: break-word;
-        white-space: pre-wrap;
       }
       .cs-msg.cs {
         align-self: flex-start;
         background: #ffffff;
-        color: var(--text);
-        border: 1px solid var(--line);
+        color: #333;
+        border: 1px solid #e0e0e0;
         border-bottom-left-radius: 4px;
       }
       .cs-msg.user {
         align-self: flex-end;
-        background: var(--primary-hover);
+        background: #0066cc;
         color: #ffffff;
         border-bottom-right-radius: 4px;
       }
@@ -244,71 +194,53 @@ class CustomerServiceChat {
       .cs-quick-replies {
         padding: 8px 12px;
         background: #ffffff;
-        border-top: 1px solid var(--line);
+        border-top: 1px solid #eee;
         display: flex;
         gap: 6px;
         overflow-x: auto;
       }
       .cs-quick-replies button {
-        background: var(--bg);
-        color: var(--text);
-        border: 1px solid var(--line);
+        background: #f1f3f5;
+        color: #333;
+        border: 1px solid #dcdcdc;
         border-radius: 16px;
         padding: 5px 10px;
         font-size: 11px;
         white-space: nowrap;
         cursor: pointer;
-        transition: background 0.2s;
       }
       .cs-quick-replies button:hover {
-        background: var(--primary-soft);
+        background: #e2e6ea;
       }
       .cs-input-area {
         display: flex;
         padding: 10px;
         background: #ffffff;
-        border-top: 1px solid var(--line);
+        border-top: 1px solid #eee;
         gap: 8px;
       }
       #cs-chat-input {
         flex: 1;
-        min-width: 0;
-        border: 1px solid var(--line);
+        border: 1px solid #ccc;
         border-radius: 20px;
         padding: 8px 14px;
         font-size: 13px;
         outline: none;
       }
       #cs-chat-input:focus {
-        border-color: var(--primary);
+        border-color: #0066cc;
       }
       .cs-input-area button {
-        background: var(--primary);
+        background: #0066cc;
         color: #ffffff;
         border: none;
         width: 36px;
         height: 36px;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      .cs-input-area button:hover {
-        background: var(--primary-hover);
-      }
-      @media (max-width: 480px) {
-        #cs-chat-container {
-          right: 16px;
-          bottom: 16px;
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        #cs-toggle-btn,
-        #cs-chat-window {
-          transition: none;
-        }
       }
     `;
     document.head.appendChild(style);
@@ -329,14 +261,14 @@ class CustomerServiceChat {
       const input = document.getElementById("cs-chat-input");
       const text = input.value.trim();
       if (!text) return;
-      input.value = "";
       this.handleUserMessage(text);
+      input.value = "";
     });
 
     document.querySelectorAll("#cs-quick-replies button").forEach((btn) => {
       btn.addEventListener("click", () => {
         const topic = btn.getAttribute("data-topic");
-        this.handleUserMessage(`Saya ingin menyampaikan: ${topic}`);
+        this.handleUserMessage(topic);
       });
     });
   }
@@ -350,58 +282,82 @@ class CustomerServiceChat {
     toggle.setAttribute("aria-expanded", String(this.isOpen));
     if (this.isOpen) {
       this.scrollToBottom();
-      const focusDelay = window.matchMedia("(prefers-reduced-motion: reduce)")
-        .matches
-        ? 0
-        : 240;
-      setTimeout(() => {
-        if (this.isOpen) document.getElementById("cs-chat-input").focus();
-      }, focusDelay);
-    } else toggle.focus();
+      setTimeout(() => document.getElementById("cs-chat-input").focus(), 200);
+    }
   }
 
-  handleUserMessage(text) {
+  async handleUserMessage(text) {
     this.addMessage("user", text);
-    const reply = this.generateAutoReply(text);
+
+    const loadingId = "loading-" + Date.now();
+    this.messages.push({
+      id: loadingId,
+      sender: "cs",
+      text: "Sedang mengetik...",
+      time: this.getCurrentTime(),
+    });
+    this.renderMessages();
+
+    // Simulasi jeda pengetikan agar terasa natural
     setTimeout(() => {
-      this.addMessage("cs", reply);
-      if (this.isOpen) document.getElementById("cs-chat-input").focus();
-    }, 600);
+      const aiReply = this.getSmartResponse(text);
+
+      this.messages = this.messages.filter((m) => m.id !== loadingId);
+      this.messages.push({
+        id: "msg-" + Date.now(),
+        sender: "cs",
+        text: aiReply,
+        time: this.getCurrentTime(),
+      });
+      localStorage.setItem("mita_cs_chat_v2", JSON.stringify(this.messages));
+      this.renderMessages();
+    }, 800);
   }
 
-  generateAutoReply(userText) {
-    const text = userText.toLowerCase();
-    if (
-      ["keluhan produk", "rusak", "cacat"].some((word) => text.includes(word))
+  getSmartResponse(userPrompt) {
+    const query = userPrompt.toLowerCase();
+
+    if (query.includes("garansi") || query.includes("klaim")) {
+      return "Untuk klaim garansi produk di MitaElektronik sangat mudah! Pastikan Anda membawa nota pembelian dan kartu garansi resmi. Klaim dapat diajukan langsung melalui toko fisik kami atau menghubungi layanan pusat bantuan kami.";
+    } else if (
+      query.includes("kipas") ||
+      query.includes("pendingin") ||
+      query.includes("ac")
     ) {
-      return "Maaf ya atas kendala pada produknya. Silakan ceritakan masalah yang dialami dan sertakan nomor pesanan agar kami bisa membantu.";
-    }
-    if (
-      ["kritik", "saran", "website", "tampilan"].some((word) =>
-        text.includes(word),
-      )
+      return "Kami merekomendasikan kipas angin 3-in-1 MitaElektronik atau pendingin udara portabel yang hemat energi dan memiliki hembusan angin yang sejuk serta senyap. Cocok untuk ruang kerja maupun kamar tidur Anda!";
+    } else if (
+      query.includes("pesan") ||
+      query.includes("lacak") ||
+      query.includes("status") ||
+      query.includes("kirim")
     ) {
-      return "Terima kasih atas kritik dan sarannya. Bagian website atau tampilan mana yang ingin kamu sampaikan?";
-    }
-    if (
-      ["pembayaran", "order", "checkout", "keranjang"].some((word) =>
-        text.includes(word),
-      )
+      return "Anda dapat melacak status pesanan secara berkala melalui menu 'Cek Pesanan' di akun Anda atau memasukkan nomor resi pengiriman yang dikirimkan melalui email konfirmasi.";
+    } else if (
+      query.includes("mouse") ||
+      query.includes("gaming") ||
+      query.includes("razer")
     ) {
-      return "Maaf atas kendala pesananmu. Periksa kembali status di Profil > Pesanan, lalu kirim nomor pesanan atau detail kendalanya agar kami bisa membantu.";
+      return "Untuk perangkat gaming, kami menyediakan Mouse Gaming Razer DeathAdder Essential dengan sensor optik presisi tinggi serta Mouse Nirkabel Asus MW103 yang nyaman untuk produktivitas harian.";
+    } else if (
+      query.includes("halo") ||
+      query.includes("hi") ||
+      query.includes("pagi") ||
+      query.includes("siang")
+    ) {
+      return "Halo! Selamat datang kembali di MitaElektronik. Ada produk elektronik, perangkat gaming, atau pesanan yang ingin Anda tanyakan hari ini?";
+    } else {
+      return `Terima kasih telah bertanya mengenai "${userPrompt}". Tim Layanan Pelanggan MitaElektronik siap membantu Anda mencarikan solusi terbaik seputar produk rumah tangga dan perangkat elektronik kami!`;
     }
-    return "Terima kasih sudah menghubungi Layanan Pelanggan MitaElektronik. Ada hal lain terkait produk atau pesanan yang bisa kami bantu?";
   }
 
   addMessage(sender, text) {
     this.messages.push({
+      id: "msg-" + Date.now(),
       sender,
-      text: String(text),
+      text,
       time: this.getCurrentTime(),
     });
-    // Simpan maksimal 50 pesan terakhir
-    this.messages = this.messages.slice(-50);
-    this.saveMessages();
+    localStorage.setItem("mita_cs_chat_v2", JSON.stringify(this.messages));
     this.renderMessages();
   }
 
@@ -409,26 +365,28 @@ class CustomerServiceChat {
     const list = document.getElementById("cs-messages-list");
     if (!list) return;
 
-    const fragment = document.createDocumentFragment();
-    this.messages.forEach((message) => {
-      const bubble = document.createElement("div");
-      bubble.className = `cs-msg ${message.sender}`;
-      bubble.textContent = message.text;
-
-      const time = document.createElement("span");
-      time.className = "cs-msg-time";
-      time.textContent = message.time;
-      bubble.appendChild(time);
-      fragment.appendChild(bubble);
-    });
-
-    list.replaceChildren(fragment);
+    list.innerHTML = this.messages
+      .map(
+        (m) => `
+        <div class="cs-msg ${m.sender}">
+          ${this.escapeHTML(m.text)}
+          <span class="cs-msg-time">${m.time}</span>
+        </div>
+      `,
+      )
+      .join("");
     this.scrollToBottom();
   }
 
   scrollToBottom() {
     const list = document.getElementById("cs-messages-list");
     if (list) list.scrollTop = list.scrollHeight;
+  }
+
+  escapeHTML(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
   }
 }
 
